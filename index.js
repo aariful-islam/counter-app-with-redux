@@ -1,37 +1,37 @@
-const INCREAMENT = "INCREAMENT"
-const DECREAMENT = "DECREAMENT"
+const {createStore} = require("redux")
+const INCREMENT = "INCREMENT"
+const DECREMENT = "DECREMENT"
 
 // declare state 
-const initaialState = () => {
+const initaialState = {
     count: 0
 };
 
 //  action 
 const incAction = () => {
     return {
-        type: "INCREAMENT",
+        type: "INCREMENT",
     }
 
 }
 const drcAction = () => {
     return {
-        type: "DECREAMENT",
+        type: "DECREMENT",
     }
 
 }
 // Reducer 
 const counter = (state = initaialState, action) => {
     switch (action.type) {
-        case "INCREAMENT":
+        case INCREMENT:
             return {
-                ...state,
-            count : state.count + 1,
-
+              ...state,
+              count: state.count + 1,
             };
-        case "DECREAMENT":
+        case "DECREMENT":
             return {
                 ...state,
-            count : state.count -1 1,
+            count : state.count -1,
 
             };
         default:
@@ -39,4 +39,10 @@ const counter = (state = initaialState, action) => {
     }
 
 }
+
+const store =createStore(counter)
+store.subscribe(()=>{
+    console.log(store.getState())
+})
+store.dispatch(incAction());
 
